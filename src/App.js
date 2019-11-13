@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Form from "./components/form";
+import Header from "./components/header";
+import Weather from "./components/weather";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const API_KEY = 'rXX6gRAGas7dEvJyz21j3Z6pWMRKaJnk';
+
+class App extends React.Component{
+  state = {
+    city: undefined,
+    temperature: undefined,
+    dayOfWeek: undefined,
+  };
+
+  gettingWeather = async (e) =>{
+    e.preventDefault();
+    const city = e.target.elements.city.value;
+    const location_api = await fetch(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${city}`);
+    const location = await location_api.json();
+    const firstCity = location[0];
+    const cityKey = firstCity.Key;
+    const getCityInfo = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${API_KEY}`);
+    const cityInfo = await getCityInfo.json();
+    console.log(cityInfo);
+
+  };
+
+  render() {
+    return(
+        <div>
+          <Header />
+          <Form getWeather = {this.gettingWeather} />
+          <Weather />
+        </div>
+    );
+  }
 }
 
 export default App;
