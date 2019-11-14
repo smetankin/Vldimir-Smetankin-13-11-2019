@@ -20,3 +20,14 @@
 .App-link {
   color: #09d3ac;
 }
+
+
+.weather-items{
+  display: flex;
+  padding: 15px;
+}
+.weather-items > div{
+  padding: 15px;
+  border: 1px solid #282c34;
+  margin: 10px;
+}
