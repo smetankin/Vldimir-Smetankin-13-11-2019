@@ -3,13 +3,12 @@ import React from 'react';
 
 
 class  Weather extends React.Component{
-    getData = () =>{
+    getDayOfWeek = () =>{
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ,"Saturday"];
-        const date = new Date(this.props.date);
+        const date = new Date(this.props.date*1000);
+        console.log(date.getDay());
         const day = date.getDay();
-        const dayOfWeek = daysOfWeek[day];
-
-        return dayOfWeek;
+        return daysOfWeek[day];
     };
     getCelsius = () =>{
         const farenheit = (this.props.temp.Maximum.Value + this.props.temp.Minimum.Value)/2;
@@ -22,13 +21,10 @@ class  Weather extends React.Component{
             <div>
                 <div className="weather-block">
                     <div>
-                        {this.props.city}
+                        {this.getDayOfWeek()}
                     </div>
                     <div>
-                        {this.getData()}
-                    </div>
-                    <div>
-                        {this.props.day.IconPhrase.toString()}
+                        {this.props.status}
                     </div>
                     <div>
                         {this.getCelsius()} °C
