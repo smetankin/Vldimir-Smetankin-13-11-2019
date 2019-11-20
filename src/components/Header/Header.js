@@ -1,15 +1,24 @@
 import React from 'react';
+import "./header.css";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 class Header extends React.Component{
     render() {
         return(
-            <header>
+            <header className={"header"}>
                 <div className="header-title">
                     Herolo Weather task
                 </div>
                 <div className="nav">
-                    <a href="#">Home</a>
-                    <a href="#">Favorites</a>
+
+                    <Link to="/">Home</Link>
+                    <Link to="/favorites">Favorites</Link>
+
                 </div>
             </header>
         );

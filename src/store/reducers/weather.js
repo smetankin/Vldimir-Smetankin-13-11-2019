@@ -1,7 +1,10 @@
-export function weather(state = [], action) {
+export function weather(state = {}, action) {
     switch (action.type) {
         case "WEATHER_FETCH_DATA_SUCCESS":
-            return action.payload;
+            return {
+                ...state,
+                [action.payload.cityKey]: action.payload.weatherData
+            }
         default:
             return state;
     }
