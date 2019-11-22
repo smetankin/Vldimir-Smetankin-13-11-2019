@@ -7,7 +7,6 @@ class Input extends React.Component{
             <form onSubmit={this.props.getWeather}>
                 <TextField
                     id="standard-basic"
-                    // className={classes.textField}
                     label="City"
                     margin="normal" type={'text'} name={'city'} placeholder={'Weather'}
                 />

@@ -12,6 +12,9 @@ export function weatherFetchData(name) {
     return(dispatch) => {
         getCityKeyByName(name)
             .then((cityKey) => {
+                if (!cityKey) {
+                    return
+                }
                 dispatch(addCityKey({cityKey, cityName: name}))
                 getWeatherByCityKey(cityKey)
                     .then(weather => dispatch(weatherFetchDataSuccess({ cityKey, weatherData: weather} )))

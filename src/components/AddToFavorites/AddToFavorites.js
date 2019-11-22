@@ -1,26 +1,33 @@
 import React from "react"
 
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
-// const useStyles = makeStyles(theme => ({
-//     button: {
-//         margin: theme.spacing(1),
-//     },
-//     input: {
-//         display: 'none',
-//     },
-// }));
+import {connect} from "react-redux";
 
 class  AddToFavorites extends React.Component{
+
+
 
     render() {
         return(
             <div>
-                <Button onClick={this.props.handleAddToFavorites} variant="contained" color="secondary"> Add to favorites </Button>
-                {/*<button onClick={this.props.handleAddToFavorites} className={"AddToFavorites"}>Add to favorites</button>*/}
+                {
+                    this.props.isCurrentCityInFavorites ?
+                        <Button onClick={this.props.handleRemoveFromFavorites} variant="contained" color="secondary"> Remove from favorites </Button>
+                        : <Button onClick={this.props.handleAddToFavorites} variant="contained" color="secondary"> Add to favorites </Button>
+
+                }
             </div>
         )
     }
 }
-export default AddToFavorites
+
+const mapStateToProps = state => {
+    return{
+        weather: state.weather,
+        currentCity: state.cityKey.find(city =>city.isCurrent),
+        favorites: state.favorites,
+        cityKey: state.cityKey
+    };
+};
+
+export default connect(mapStateToProps)(AddToFavorites);

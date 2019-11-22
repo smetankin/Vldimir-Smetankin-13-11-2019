@@ -15,7 +15,7 @@ class  WeatherToday extends React.Component{
                     {this.props.temp != null ? getCelsius(this.props.temp) : null}°C
                 </div>
                 <div className="status-today">
-                    {this.props.status !=null? this.props.status : null}
+                    {this.props.status}
                 </div>
             </div>
         );

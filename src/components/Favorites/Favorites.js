@@ -1,10 +1,11 @@
 import React from "react"
+import { Link } from 'react-router-dom'
 
 import Card from '@material-ui/core/Card';
 import "./favorites.css"
 import {connect} from "react-redux";
 import {getCelsius} from "../../helpers/getCelsium";
-import {getWeatherInfoByCityKey} from "../../store/actions/wether";
+import {getWeatherInfoByCityKey} from "../../store/actions/weather";
 
 class Favorites  extends React.Component{
 
@@ -13,7 +14,7 @@ class Favorites  extends React.Component{
         this.props.favorites.forEach((item) =>
             this.props.getWeatherInfoByCityKey(item)
         );
-        console.log("cityKey:",this.props.cityKey)
+        console.log("favorites:",this.props.favorites)
     }
 
     render() {
@@ -24,13 +25,28 @@ class Favorites  extends React.Component{
                 </div>
                 <div className="favorite-items">
                     {
-                        this.props.favorites.map((item, index) =>(
-                               <Card key={index}>
-                                   <div className={"city"}>{this.props.cityKey[index].cityName}</div>
-                                   <div className={"temperature"}>{getCelsius(this.props.weather[item][0].Temperature)}°C</div>
-                                   <div className={"status"}>{this.props.weather[item][0].Day.IconPhrase}</div>
-                               </Card>
-                            )
+                        // this.props.favorites.length >0 ?
+                        this.props.favorites.map((item, index) =>{
+                            const favoriteCityNameObject = this.props.cityKey.find(ck => ck.cityKey === item);
+                            const weatherForCity = this.props.weather[item];
+
+                            if (!favoriteCityNameObject || !weatherForCity) {
+                                return null;
+                            }
+
+                            return (
+                                <div key={index} className={"favorite-card"}>
+                                    <Link  to={`/${favoriteCityNameObject.cityKey}`}>
+                                        <Card>
+                                            <div className={"city"}>{favoriteCityNameObject.cityName}</div>
+                                            <div className={"temperature"}>{getCelsius(weatherForCity[0].Temperature)}°C</div>
+                                            <div className={"status"}>{this.props.weather[item][0].Day.IconPhrase}</div>
+                                        </Card>
+                                    </Link>
+                                </div>
+                                )
+
+                            }
                         )
                     }
                 </div>
