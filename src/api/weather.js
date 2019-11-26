@@ -23,3 +23,8 @@ export const getWeatherInfoByCity = async (cityName) =>{
     const cityInfo = await makeAPICall(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${API_KEY}`);
     return cityInfo.DailyForecasts;
 };
+
+export const autocompleateSearch = async (text) =>{
+    const cities = await makeAPICall(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${text}`);
+    return cities;
+}

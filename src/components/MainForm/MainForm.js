@@ -28,9 +28,7 @@ class  MainForm extends React.Component{
         }
     }
 
-    getWeather = (e) =>{
-        e.preventDefault();
-        const city = e.target.elements.city.value;
+    getWeather = (city) => {
         this.props.getWeatherData(city);
     };
 

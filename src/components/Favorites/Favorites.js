@@ -10,11 +10,9 @@ import {getWeatherInfoByCityKey} from "../../store/actions/weather";
 class Favorites  extends React.Component{
 
     componentDidMount() {
-        // console.log('mounted', this.props)
         this.props.favorites.forEach((item) =>
             this.props.getWeatherInfoByCityKey(item)
         );
-        console.log("favorites:",this.props.favorites)
     }
 
     render() {

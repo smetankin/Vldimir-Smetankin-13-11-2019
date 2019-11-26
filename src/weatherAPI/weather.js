@@ -8,7 +8,6 @@ export const getCityKeyByName = async (name) =>{
 };
 
 export const getWeatherInfoByCity = async (name) =>{
-    console.log('name', name)
     const cityKey = await getCityKeyByName(name);
     const getCityInfo = await fetch(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${API_KEY}`);
     const cityInfo = await getCityInfo.json();

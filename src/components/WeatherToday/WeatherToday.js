@@ -2,23 +2,19 @@ import React from "react";
 import {getCelsius} from "../../helpers/getCelsium";
 import "./weatherToday.css"
 
-class  WeatherToday extends React.Component{
-
-    render() {
-        console.log("props" , this.props);
+function WeatherToday(props){
         return(
             <div>
                 <div className="city-name">
-                    {this.props.city}
+                    {props.city}
                 </div>
                 <div className="temperature-today">
-                    {this.props.temp != null ? getCelsius(this.props.temp) : null}°C
+                    {props.temp != null ? getCelsius(props.temp) : null}°C
                 </div>
                 <div className="status-today">
-                    {this.props.status}
+                    {props.status}
                 </div>
             </div>
         );
-    }
 }
 export default WeatherToday

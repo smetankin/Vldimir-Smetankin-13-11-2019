@@ -1,14 +1,8 @@
 import React from 'react';
 import "./header.css";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-class Header extends React.Component{
-    render() {
+function Header(){
         return(
             <header className={"header"}>
                 <div className="header-title">
@@ -22,6 +16,5 @@ class Header extends React.Component{
                 </div>
             </header>
         );
-    }
 }
 export default Header;
